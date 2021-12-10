@@ -1,0 +1,37 @@
+package analyses;
+
+import de.ovgu.featureide.fm.core.base.IFeatureModel;
+import de.ovgu.featureide.fm.core.base.IFeatureStructure;
+
+public class NumberOfLeafFeatures implements IFMAnalysis {
+
+    private static final String LABEL = "NumberOfLeafFeatures";
+
+    @Override
+    public String getLabel() {
+        return LABEL;
+    }
+
+    @Override
+    public String getDescription() {
+        return "";
+    }
+
+    @Override
+    public String getResult(IFeatureModel featureModel) {
+        return Integer.toString(getNumberOfLeafChildren(featureModel.getStructure().getRoot()));
+    }
+
+    	
+	private static int getNumberOfLeafChildren(IFeatureStructure structure) {
+		int count = 0;
+		if (structure.getChildrenCount() ==  0) {
+			return 1;
+		}
+		for(IFeatureStructure child :structure.getChildren()) {
+			count += getNumberOfLeafChildren(child);
+		}
+		return count;
+	}
+    
+}
