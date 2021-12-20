@@ -4,7 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.prop4j.Node;
+
+import analyses.IFMAnalysis.Format;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
+import util.CnfTranslator;
 import util.FMUtils;
 
 public class AnalysisHandler {
@@ -24,6 +28,10 @@ public class AnalysisHandler {
         return getCleanName(file, inputPath) + ";" + evaluateFeatureModel(FMUtils.readFeatureModel(file.getPath()), timeout);
     }
 
+    public String evaluateDimacsFile(File file, int timeout, String inputPath) {
+        return getCleanName(file, inputPath) + ";" + evaluateCNF(CnfTranslator.readDimacs(file.getPath()), timeout);
+    }
+
 
     private String getCleanName(File file, String inputPath) {
         String[] split = file.getAbsolutePath().split(inputPath);
@@ -34,6 +42,16 @@ public class AnalysisHandler {
         String csvRow = "";
         for (IFMAnalysis analysis: analyses) {
             csvRow += analysis.getResult(model) + ";";
+        }
+        return csvRow.substring(0, csvRow.length() - 1) + "\n";
+    }
+
+    public String evaluateCNF(Node node, int timeout) {
+        String csvRow = "";
+        for (IFMAnalysis analysis: analyses) {
+            if (analysis.supportsFormat(Format.CNF)) {
+                csvRow += analysis.getResult(node) + ";";
+            }
         }
         return csvRow.substring(0, csvRow.length() - 1) + "\n";
     }

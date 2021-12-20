@@ -1,5 +1,7 @@
 package analyses;
 
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IConstraint;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 
@@ -28,6 +30,16 @@ public class AverageConstraintSize implements IFMAnalysis {
 			sizeCount += constraint.getNode().getLiterals().size();
 		}
 		return Double.toString(sizeCount / numberOfConstraints);
+    }
+
+    @Override
+    public String getResult(Node node) {
+        return null;
+    }
+
+    @Override
+    public boolean supportsFormat(Format format) {
+        return format == Format.FEATURE_MODEL;
     }
     
 }

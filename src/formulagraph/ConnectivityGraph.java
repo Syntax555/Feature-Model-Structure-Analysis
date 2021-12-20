@@ -3,49 +3,50 @@ package formulagraph;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.ovgu.featureide.fm.core.analysis.cnf.CNF;
-import de.ovgu.featureide.fm.core.analysis.cnf.LiteralSet;
-import de.ovgu.featureide.fm.core.analysis.cnf.formula.FeatureModelFormula;
+import org.prop4j.Node;
+import org.prop4j.Or;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 
 public class ConnectivityGraph {
 
-    private Map<Integer, Vertex> vertices;
+    private Map<String, Vertex> vertices;
 
     public ConnectivityGraph(IFeatureModel featureModel) {
         this.vertices = new HashMap<>();
         initializeGraph(featureModel);
     }
 
-    public Vertex getVertex(int variable) {
+    public Vertex getVertex(String variable) {
         return vertices.get(variable);
     }
 
-    public void addVertex(int variable) {
+    public void addVertex(String variable) {
         vertices.put(variable, new Vertex(variable));
     }
 
-    
     private void initializeGraph(IFeatureModel featureModel) {
-        CNF cnf = new FeatureModelFormula(featureModel).getCNF();
-        int i = 0;
-        for (LiteralSet clause : cnf.getClauses()) {
+        Node cnf = featureModel.getAnalyser().getCnf();
+        for (Node clause : cnf.getChildren()) {
             handleClause(clause);
         }
     }
     
-    private void handleClause(LiteralSet set) {
-        if (set.size() < 2) {
+    private void handleClause(Node set) {
+        if (set.getChildren().length < 2) {
             return;
         }
-        for (int i = 0; i < set.getLiterals().length - 1; i++) {
-            for (int j = i+1; j < set.getLiterals().length; j++) {
-                handlePair(Math.abs(set.getLiterals()[i]), Math.abs(set.getLiterals()[j]));
+        if (!(set instanceof Or)) {
+            System.out.println("Not CNF");
+        }
+        for (int i = 0; i < set.getChildren().length - 1; i++) {
+            for (int j = i+1; j < set.getChildren().length; j++) {
+                handlePair((String) set.getChildren()[i].getLiterals().get(0).var, (String) set.getChildren()[j].getLiterals().get(0).var);
             }
         }
     }
     
-    private void handlePair(int a, int b) {
+    private void handlePair(String a, String b) {
         if (getVertex(a) == null) {
             addVertex(a);
         }

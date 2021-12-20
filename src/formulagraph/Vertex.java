@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vertex {
-    private int variable;
+    private String variable;
     private boolean beingVisited;
     private boolean visited;
-    private List<Integer> adjacencyList;
+    private List<String> adjacencyList;
 
-    public Vertex(int variable) {
+    public Vertex(String variable) {
         this.variable = variable;
         this.adjacencyList = new ArrayList<>();
     }
 
-    public void addNeighbor(int adjacent) {
+    public void addNeighbor(String adjacent) {
         if (!this.adjacencyList.contains(adjacent)) {
             this.adjacencyList.add(adjacent);
         }
     }
 
-    public List<Integer> getAdjacencyList() {
+    public List<String> getAdjacencyList() {
         return adjacencyList;
     }
 

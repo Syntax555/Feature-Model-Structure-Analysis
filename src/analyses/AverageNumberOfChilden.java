@@ -1,5 +1,7 @@
 package analyses;
 
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 
@@ -33,5 +35,15 @@ public class AverageNumberOfChilden implements IFMAnalysis {
 		}
 		return Double.toString((double)childrenCount / numberOfNonLeafFeatures);
     }
+
+	@Override
+	public String getResult(Node node) {
+		return null;
+	}
+
+	@Override
+	public boolean supportsFormat(Format format) {
+		return format == Format.FEATURE_MODEL;
+	}
     
 }

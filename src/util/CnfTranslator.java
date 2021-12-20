@@ -1,10 +1,15 @@
+package util;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
-import de.ovgu.featureide.fm.core.analysis.cnf.CNF;
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
-import util.FMUtils;
-import util.FileUtils;
+import de.ovgu.featureide.fm.core.io.dimacs.DimacsReader;
 
 public class CnfTranslator {
     
@@ -29,7 +34,7 @@ public class CnfTranslator {
         }
         IFeatureModel model = FMUtils.readFeatureModel(file.getPath());
         long startTime = System.nanoTime();
-        CNF cnf = FMUtils.getCNF(model);
+        Node cnf = FMUtils.getCNF(model);
         long endTime = System.nanoTime();
         String[] split = file.getPath().split(File.separator);
         String dirName = split[split.length - 2];
@@ -41,6 +46,17 @@ public class CnfTranslator {
         }
 
         return file.getPath() + ";" + ((endTime - startTime) / 1000000) + "\n";
+    }
+
+    public static Node readDimacs(String path) {
+        DimacsReader reader = new DimacsReader();
+        Node cnf = null;
+        try {
+            cnf = reader.read(new FileReader(new File(path)));
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return cnf;
     }
 
 }

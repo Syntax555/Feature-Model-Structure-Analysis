@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.ovgu.featureide.fm.core.analysis.cnf.CNF;
-import de.ovgu.featureide.fm.core.analysis.cnf.formula.FeatureModelFormula;
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import de.ovgu.featureide.fm.core.io.dimacs.DimacsWriter;
 import util.BinaryRunner;
@@ -39,9 +39,7 @@ public class NumberOfValidConfigurations implements IFMAnalysis {
 
     @Override
     public String getResult(IFeatureModel featureModel) {
-        FeatureModelFormula formula = new FeatureModelFormula(featureModel);
-		CNF cnf = formula.getCNF();
-		createTemporaryDimacs(cnf);
+		createTemporaryDimacs(featureModel.getAnalyser().getCnf());
 		BinaryResult result = null;
 		result = executeSolver(TEMPORARY_DIMACS_PATH, 1);
 		if (result.status == Status.TIMEOUT) {
@@ -53,9 +51,9 @@ public class NumberOfValidConfigurations implements IFMAnalysis {
 		return "-2";
     }
 	
-	public static void createTemporaryDimacs(CNF cnf) {
-		final DimacsWriter dWriter = new DimacsWriter(cnf);
-		final String dimacsContent = dWriter.write();
+	public static void createTemporaryDimacs(Node cnf) {
+		final DimacsWriter dWriter = new DimacsWriter();
+		final String dimacsContent = dWriter.write(cnf);
 		FileUtils.writeContentToFile(TEMPORARY_DIMACS_PATH, dimacsContent);
     }
     
@@ -88,5 +86,17 @@ public class NumberOfValidConfigurations implements IFMAnalysis {
 
     private boolean isUNSAT(String output) {
 		return output.contains(UNSAT_FLAG);
+	}
+
+	@Override
+	public String getResult(Node node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean supportsFormat(Format format) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

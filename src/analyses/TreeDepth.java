@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import de.ovgu.featureide.fm.core.base.IFeatureStructure;
 
@@ -37,6 +39,18 @@ public class TreeDepth implements IFMAnalysis {
 		}
 		return Collections.max(depthOfChildren) + 1;
 	}
+
+    @Override
+    public String getResult(Node node) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean supportsFormat(Format format) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 
 }

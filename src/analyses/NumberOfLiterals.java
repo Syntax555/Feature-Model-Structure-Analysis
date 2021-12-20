@@ -1,8 +1,8 @@
 package analyses;
 
-import de.ovgu.featureide.fm.core.analysis.cnf.CNF;
-import de.ovgu.featureide.fm.core.analysis.cnf.LiteralSet;
-import de.ovgu.featureide.fm.core.analysis.cnf.formula.FeatureModelFormula;
+import org.prop4j.Node;
+import org.prop4j.Or;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 
 public class NumberOfLiterals implements IFMAnalysis {
@@ -22,13 +22,28 @@ public class NumberOfLiterals implements IFMAnalysis {
 
     @Override
     public String getResult(IFeatureModel featureModel) {
-        FeatureModelFormula formula = new FeatureModelFormula(featureModel);
-        CNF cnf = formula.getCNF();
+        Node cnf = featureModel.getAnalyser().getCnf();
         int numberOfLiterals = 0;
-        for (LiteralSet clause : cnf.getClauses()) {
-            numberOfLiterals += clause.getLiterals().length;
+        for (Node clause : cnf.getChildren()) {
+            if (!(clause instanceof Or)) {
+                System.out.println("Not CNF");
+                return null;
+            }
+            numberOfLiterals += clause.getLiterals().size();
         }
         return Integer.toString(numberOfLiterals);
+    }
+
+    @Override
+    public String getResult(Node node) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean supportsFormat(Format format) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
 }

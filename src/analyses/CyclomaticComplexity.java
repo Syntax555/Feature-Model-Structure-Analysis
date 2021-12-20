@@ -1,5 +1,7 @@
 package analyses;
 
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import formulagraph.ConnectivityGraph;
 
@@ -22,6 +24,18 @@ public class CyclomaticComplexity implements IFMAnalysis {
         ConnectivityGraph graph = new ConnectivityGraph(featureModel);
         //TODO implement this
         return null;
+    }
+
+    @Override
+    public String getResult(Node node) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean supportsFormat(Format format) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
 }

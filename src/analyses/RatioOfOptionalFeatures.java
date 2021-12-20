@@ -1,9 +1,9 @@
 package analyses;
 
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.FeatureModelAnalyzer;
-import de.ovgu.featureide.fm.core.analysis.cnf.formula.FeatureModelFormula;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
-import de.ovgu.featureide.fm.core.job.monitor.NullMonitor;
 
 public class RatioOfOptionalFeatures implements IFMAnalysis{
 
@@ -22,10 +22,22 @@ public class RatioOfOptionalFeatures implements IFMAnalysis{
     @Override
     public String getResult(IFeatureModel featureModel) {
         int numberOfFeatures = featureModel.getNumberOfFeatures();
-        FeatureModelAnalyzer analyzer = new FeatureModelAnalyzer(new FeatureModelFormula(featureModel));
-        int numberOfCoreFeatures = analyzer.getCoreFeatures(new NullMonitor<>()).size();
-        int numberOfDeadFeatures = analyzer.getDeadFeatures(new NullMonitor<>()).size();
-        return Integer.toString((numberOfFeatures - numberOfCoreFeatures - numberOfDeadFeatures) / numberOfFeatures);
+        FeatureModelAnalyzer analyzer = new FeatureModelAnalyzer(featureModel);
+        int numberOfCoreFeatures = analyzer.getCoreFeatures().size();
+        int numberOfDeadFeatures = analyzer.getDeadFeatures().size();
+        return Double.toString((double)(numberOfFeatures - numberOfCoreFeatures - numberOfDeadFeatures) / numberOfFeatures);
+    }
+
+    @Override
+    public String getResult(Node node) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean supportsFormat(Format format) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
 }

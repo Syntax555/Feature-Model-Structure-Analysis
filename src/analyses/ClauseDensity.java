@@ -1,7 +1,7 @@
 package analyses;
 
-import de.ovgu.featureide.fm.core.analysis.cnf.CNF;
-import de.ovgu.featureide.fm.core.analysis.cnf.formula.FeatureModelFormula;
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 
 public class ClauseDensity implements IFMAnalysis {
@@ -20,9 +20,20 @@ public class ClauseDensity implements IFMAnalysis {
 
     @Override
     public String getResult(IFeatureModel featureModel) {
-        FeatureModelFormula formula = new FeatureModelFormula(featureModel);
-		CNF cnf = formula.getCNF();
-		return Double.toString((double) cnf.getClauses().size() / cnf.getVariables().size());
+        Node cnf = featureModel.getAnalyser().getCnf();
+		return Double.toString((double) cnf.getChildren().length / cnf.getVariables().size());
+    }
+
+    @Override
+    public String getResult(Node node) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean supportsFormat(Format format) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
 }

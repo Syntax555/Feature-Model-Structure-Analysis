@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IConstraint;
 import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
@@ -36,6 +38,18 @@ public class FeaturesInConstraintsDensity implements IFMAnalysis {
 		int numberOfFeaturesAppearingInAConstraint = appearingFeatures.size();
 		
 		return Double.toString((double)numberOfFeaturesAppearingInAConstraint / numberOfFeatures);
+    }
+
+    @Override
+    public String getResult(Node node) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean supportsFormat(Format format) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
 }

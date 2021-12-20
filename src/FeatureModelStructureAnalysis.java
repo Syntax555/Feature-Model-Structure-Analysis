@@ -79,7 +79,7 @@ public class FeatureModelStructureAnalysis {
 		// analysisHandler.registerAnalysis(new ClauseDensity());
 
 		// analysisHandler.registerAnalysis(new NumberOfValidConfigurations());
-		// analysisHandler.registerAnalysis(new ConnectivityDensity());
+		analysisHandler.registerAnalysis(new ConnectivityDensity());
 	}
 
 }

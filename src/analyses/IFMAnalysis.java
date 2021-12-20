@@ -1,8 +1,15 @@
 package analyses;
 
+import org.prop4j.Node;
+
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 
 public interface IFMAnalysis {
+
+    enum Format {
+        FEATURE_MODEL, CNF
+    }
+
     /**
      * Provide label that is used as CSV column header
      * @return
@@ -21,5 +28,20 @@ public interface IFMAnalysis {
      * @return String to be saved in the csv for that model
      */
     public String getResult(IFeatureModel featureModel);
+
+
+    /**
+     * 
+     * @param node
+     * @return
+     */
+    public String getResult(Node node);
+
+    /**
+     * 
+     * @param format
+     * @return
+     */
+    public boolean supportsFormat(Format format);
 
 }
