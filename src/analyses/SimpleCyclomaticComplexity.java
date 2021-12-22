@@ -5,9 +5,9 @@ import org.prop4j.Node;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import formulagraph.ConnectivityGraph;
 
-public class CyclomaticComplexity implements IFMAnalysis {
+public class SimpleCyclomaticComplexity implements IFMAnalysis {
 
-    private static final String LABEL = "CyclomaticComplexity";
+    private static final String LABEL = "SimpleCyclomaticComplexity";
 
     @Override
     public String getLabel() {
@@ -22,8 +22,7 @@ public class CyclomaticComplexity implements IFMAnalysis {
     @Override
     public String getResult(IFeatureModel featureModel) {
         ConnectivityGraph graph = new ConnectivityGraph(featureModel);
-        //TODO implement this
-        return null;
+        return Integer.toString(graph.getNumberOfCycles());
     }
 
     @Override

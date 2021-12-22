@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Vertex {
     private String variable;
-    private boolean beingVisited;
     private boolean visited;
     private List<String> adjacencyList;
 
@@ -20,6 +19,8 @@ public class Vertex {
         }
     }
 
+    public String getVariable() {return variable;}
+
     public List<String> getAdjacencyList() {
         return adjacencyList;
     }
@@ -27,4 +28,7 @@ public class Vertex {
     public int getNumberOfNeighbors() {
         return adjacencyList.size();
     }
+
+    public void setVisited(boolean v) { visited = v; }
+    public boolean isVisited() { return visited;}
 }

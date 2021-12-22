@@ -1,22 +1,7 @@
 import java.io.File;
 import java.util.List;
 
-import analyses.AnalysisHandler;
-import analyses.AverageConstraintSize;
-import analyses.AverageNumberOfChilden;
-import analyses.ClauseDensity;
-import analyses.ConnectivityDensity;
-import analyses.CtcDensity;
-import analyses.FeaturesInConstraintsDensity;
-import analyses.NumberOfClauses;
-import analyses.NumberOfConstraints;
-import analyses.NumberOfFeatures;
-import analyses.NumberOfLeafFeatures;
-import analyses.NumberOfLiterals;
-import analyses.NumberOfTopFeatures;
-import analyses.NumberOfValidConfigurations;
-import analyses.RatioOfOptionalFeatures;
-import analyses.TreeDepth;
+import analyses.*;
 import util.FMUtils;
 import util.FileUtils;
 
@@ -41,8 +26,7 @@ public class FeatureModelStructureAnalysis {
 
 		List<File> files = FileUtils.getFileListWithExtension(args[0], "xml");
 
-		analysis.handleFiles(files, args[0], args[1]);
-
+		analysis.handleFiles(files, args[0], args.length == 1 ? "result.csv" : args[1]);
 	}
 
 	private void handleFiles(List<File> files, String inputPath, String outputfile) {
@@ -75,11 +59,14 @@ public class FeatureModelStructureAnalysis {
 		// analysisHandler.registerAnalysis(new AverageNumberOfChilden());
 
 		// analysisHandler.registerAnalysis(new NumberOfClauses());
-		// analysisHandler.registerAnalysis(new NumberOfLiterals());
+		analysisHandler.registerAnalysis(new NumberOfLiterals());
 		// analysisHandler.registerAnalysis(new ClauseDensity());
 
 		// analysisHandler.registerAnalysis(new NumberOfValidConfigurations());
 		analysisHandler.registerAnalysis(new ConnectivityDensity());
+
+		analysisHandler.registerAnalysis(new SimpleCyclomaticComplexity());
+		analysisHandler.registerAnalysis(new IndependentCyclomaticComplexity());
 	}
 
 }
