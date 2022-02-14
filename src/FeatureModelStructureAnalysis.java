@@ -8,14 +8,31 @@ import analyses.ClauseDensity;
 import analyses.ConnectivityDensity;
 import analyses.CtcDensity;
 import analyses.FeaturesInConstraintsDensity;
+import analyses.FractionOfBinaryAndTernaryClauses;
+import analyses.FractionOfHornClauses;
+import analyses.NodesDegreeStatistics;
+import analyses.NumberOfAbstractFeatures;
+import analyses.NumberOfAtomicSets;
 import analyses.NumberOfClauses;
+import analyses.NumberOfCompoundFeatures;
+import analyses.NumberOfConcreteFeatures;
 import analyses.NumberOfConstraints;
+import analyses.NumberOfCoreFeatures;
+import analyses.NumberOfDeadFeatures;
+import analyses.NumberOfFalseOptionalFeatures;
 import analyses.NumberOfFeatures;
+import analyses.NumberOfFeaturesInConstraints;
+import analyses.NumberOfHiddenFeatures;
 import analyses.NumberOfLeafFeatures;
 import analyses.NumberOfLiterals;
+import analyses.NumberOfOccurrencesInAHornClauseForEachVariable;
+import analyses.NumberOfTerminalFeatures;
 import analyses.NumberOfTopFeatures;
 import analyses.NumberOfValidConfigurations;
+import analyses.RatioOfClausesDividedByFeatures;
 import analyses.RatioOfOptionalFeatures;
+import analyses.RatioOfPositiveToNegativeLiteralsInEachClause;
+import analyses.RatioOfPositiveToNegativeOccurrencesOfEachVariable;
 import analyses.TreeDepth;
 import util.FMUtils;
 import util.FileUtils;
@@ -61,24 +78,43 @@ public class FeatureModelStructureAnalysis {
 
 	private void initializeAnalyses() {
 		analysisHandler = new AnalysisHandler();
-		// analysisHandler.registerAnalysis(new NumberOfFeatures());
-		// analysisHandler.registerAnalysis(new NumberOfLeafFeatures());
-		// analysisHandler.registerAnalysis(new NumberOfTopFeatures());
-
-		// analysisHandler.registerAnalysis(new NumberOfConstraints());
-		// analysisHandler.registerAnalysis(new AverageConstraintSize());
-		// analysisHandler.registerAnalysis(new CtcDensity());
-		// analysisHandler.registerAnalysis(new FeaturesInConstraintsDensity());
+		analysisHandler.registerAnalysis(new NumberOfFeatures());
+		analysisHandler.registerAnalysis(new NumberOfLeafFeatures());
+		analysisHandler.registerAnalysis(new NumberOfTopFeatures());
+		analysisHandler.registerAnalysis(new NumberOfConcreteFeatures());
+		analysisHandler.registerAnalysis(new NumberOfAbstractFeatures());
+		analysisHandler.registerAnalysis(new NumberOfCompoundFeatures());
+		analysisHandler.registerAnalysis(new NumberOfTerminalFeatures());
+		analysisHandler.registerAnalysis(new NumberOfHiddenFeatures());
+		analysisHandler.registerAnalysis(new NumberOfCoreFeatures());
+		analysisHandler.registerAnalysis(new NumberOfDeadFeatures());
+		analysisHandler.registerAnalysis(new NumberOfFalseOptionalFeatures());
 		analysisHandler.registerAnalysis(new RatioOfOptionalFeatures());
+		// analysisHandler.registerAnalysis(new NumberOfAtomicSets());
 
-		// analysisHandler.registerAnalysis(new TreeDepth());
-		// analysisHandler.registerAnalysis(new AverageNumberOfChilden());
+		analysisHandler.registerAnalysis(new NumberOfClauses());
+		analysisHandler.registerAnalysis(new FractionOfBinaryAndTernaryClauses());
+		analysisHandler.registerAnalysis(new FractionOfHornClauses());
+		analysisHandler.registerAnalysis(new NumberOfOccurrencesInAHornClauseForEachVariable());
+		analysisHandler.registerAnalysis(new ClauseDensity());
+		analysisHandler.registerAnalysis(new RatioOfClausesDividedByFeatures());
 
-		// analysisHandler.registerAnalysis(new NumberOfClauses());
-		// analysisHandler.registerAnalysis(new NumberOfLiterals());
-		// analysisHandler.registerAnalysis(new ClauseDensity());
+		analysisHandler.registerAnalysis(new NodesDegreeStatistics());
 
-		// analysisHandler.registerAnalysis(new NumberOfValidConfigurations());
+		analysisHandler.registerAnalysis(new NumberOfLiterals());
+		analysisHandler.registerAnalysis(new RatioOfPositiveToNegativeLiteralsInEachClause());
+		analysisHandler.registerAnalysis(new RatioOfPositiveToNegativeOccurrencesOfEachVariable());
+
+		analysisHandler.registerAnalysis(new NumberOfConstraints());
+		analysisHandler.registerAnalysis(new NumberOfFeaturesInConstraints());
+		analysisHandler.registerAnalysis(new FeaturesInConstraintsDensity());
+
+		analysisHandler.registerAnalysis(new AverageConstraintSize());
+		analysisHandler.registerAnalysis(new TreeDepth());
+		analysisHandler.registerAnalysis(new AverageNumberOfChilden());
+		analysisHandler.registerAnalysis(new CtcDensity());
+
+		analysisHandler.registerAnalysis(new NumberOfValidConfigurations());
 		analysisHandler.registerAnalysis(new ConnectivityDensity());
 	}
 

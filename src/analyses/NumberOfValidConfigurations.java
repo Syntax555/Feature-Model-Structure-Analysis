@@ -39,14 +39,18 @@ public class NumberOfValidConfigurations implements IFMAnalysis {
 
     @Override
     public String getResult(IFeatureModel featureModel) {
-		createTemporaryDimacs(featureModel.getAnalyser().getCnf());
-		BinaryResult result = null;
-		result = executeSolver(TEMPORARY_DIMACS_PATH, 1);
-		if (result.status == Status.TIMEOUT) {
-			return "-1";
-		}
-		if (result.status == Status.SOLVED) {
-			return parseResult(result.stdout);
+		try {
+			createTemporaryDimacs(featureModel.getAnalyser().getCnf());
+			BinaryResult result = null;
+			result = executeSolver(TEMPORARY_DIMACS_PATH, 1);
+			if (result.status == Status.TIMEOUT) {
+				return "-1";
+			}
+			if (result.status == Status.SOLVED) {
+				return parseResult(result.stdout);
+			}
+		} catch (Exception e) {
+			//TODO: handle exception
 		}
 		return "-2";
     }
