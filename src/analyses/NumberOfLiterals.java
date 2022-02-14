@@ -23,6 +23,7 @@ public class NumberOfLiterals implements IFMAnalysis {
     @Override
     public String getResult(IFeatureModel featureModel) {
         Node cnf = featureModel.getAnalyser().getCnf();
+
         int numberOfLiterals = 0;
         for (Node clause : cnf.getChildren()) {
             if (!(clause instanceof Or)) {

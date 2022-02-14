@@ -115,7 +115,5 @@ public class FMUtils {
 			features.addAll(getSubtreeOfFeature(child));
 		}
 		return features;
-		
 	}
-	
 }
