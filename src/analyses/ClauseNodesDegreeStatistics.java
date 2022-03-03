@@ -5,15 +5,11 @@ import java.util.List;
 
 import org.prop4j.Node;
 
-import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
-import util.FMUtils;
-import util.NodeUtils;
-import util.StatisticsUtils;
 
-public class NodesDegreeStatistics implements IFMAnalysis{
+public class ClauseNodesDegreeStatistics implements IFMAnalysis {
 
-    private static final String LABEL = "NodesDegreeStatistics";
+    private static final String LABEL = "ClauseNodesDegreeStatistics";
 
     @Override
     public String getLabel() {
@@ -27,8 +23,8 @@ public class NodesDegreeStatistics implements IFMAnalysis{
 
     @Override
     public String getResult(IFeatureModel featureModel) {
-        Node cnf = featureModel.getAnalyser().getCnf();
-        return StatisticsUtils.toString(NodeUtils.getDegreeStatistics(cnf.getChildren()));
+
+        return null;
     }
 
     @Override
