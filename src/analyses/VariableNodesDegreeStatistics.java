@@ -1,8 +1,13 @@
 package analyses;
 
+import java.util.List;
+
 import org.prop4j.Node;
 
+import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
+import util.NodeUtils;
+import util.StatisticsUtils;
 
 public class VariableNodesDegreeStatistics implements IFMAnalysis{
 
@@ -21,6 +26,7 @@ public class VariableNodesDegreeStatistics implements IFMAnalysis{
     @Override
     public String getResult(IFeatureModel featureModel) {
         return null;
+
     }
 
     @Override

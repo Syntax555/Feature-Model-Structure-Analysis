@@ -7,6 +7,8 @@ import org.prop4j.Node;
 
 import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
+import util.FMUtils;
+import util.NodeUtils;
 import util.StatisticsUtils;
 
 public class NodesDegreeStatistics implements IFMAnalysis{
@@ -25,20 +27,8 @@ public class NodesDegreeStatistics implements IFMAnalysis{
 
     @Override
     public String getResult(IFeatureModel featureModel) {
-        return StatisticsUtils.toString(getDegreeStatistics(featureModel));
-    }
-
-    private List<Double> getDegreeStatistics(IFeatureModel featureModel) {
-        List<Double> ratio = new LinkedList<>();
-
-        for (IFeature feature : featureModel.getFeatures()) {
-            Double outDegree = (double) feature.getStructure().getChildrenCount();
-            Double sumDegree = outDegree + 1;
-
-            ratio.add(outDegree / sumDegree);
-        }
-
-        return ratio;
+        Node cnf = featureModel.getAnalyser().getCnf();
+        return StatisticsUtils.toString(NodeUtils.getDegreeStatistics(cnf.getChildren()));
     }
 
     @Override
