@@ -116,4 +116,16 @@ public class FMUtils {
 		}
 		return features;
 	}
+
+    public static List<Double> getDegreeStatistics(List<IFeature> features) {
+        List<Double> ratio = new ArrayList<>();
+
+        for (IFeature feature : features) {
+            Double outDegree = (double) feature.getStructure().getChildrenCount();
+            Double sumDegree = outDegree + 1;
+
+            ratio.add(outDegree / sumDegree);
+        }
+        return ratio;
+    }
 }
