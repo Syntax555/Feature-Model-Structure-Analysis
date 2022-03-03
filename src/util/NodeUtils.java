@@ -66,4 +66,16 @@ public class NodeUtils {
         return result.doubleValue();
     }
 
+    public static List<Double> getDegreeStatistics(Node[] nodes) {
+        List<Double> ratio = new LinkedList<>();
+
+        for (Node node : nodes) {
+            Double outDegree = (double) node.getChildren().length;
+            Double sumDegree = outDegree + 1;
+
+            ratio.add(outDegree / sumDegree);
+        }
+        return ratio;
+    }
+
 }
