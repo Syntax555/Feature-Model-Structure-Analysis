@@ -20,7 +20,9 @@ public class NumberOfUnitPropagations implements IFMAnalysis{
 
     @Override
     public String getResult(IFeatureModel featureModel) {
-        // TODO Auto-generated method stub
+        Node cnf = featureModel.getAnalyser().getCnf();
+
+        cnf.getVariables();
         return null;
     }
 
