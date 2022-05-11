@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "/mnt/c/Users/Tolga/Downloads/spark-core_2.13-3.2.1.jar",
+            "lib/spark-mllib_2.13-3.2.1.jar"
+        ]
+    }
+}
